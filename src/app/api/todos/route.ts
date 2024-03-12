@@ -23,3 +23,17 @@ export async function POST(request: Request) {
 
   return Response.json({ todo });
 }
+
+export async function DELETE(request: Request) {
+  const { id } = await request.json();
+
+  const response = await fetch(`http://localhost:4000/todos/${id}`, {
+    method: "DELETE",
+  });
+
+  if (response.status === 204) {
+    return new Response(null, { status: 204 });
+  } else {
+    return new Response("Todo not found", { status: 404 });
+  }
+}

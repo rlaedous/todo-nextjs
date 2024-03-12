@@ -3,7 +3,7 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import React, { useState } from "react";
 
-import type { NewTodo, Todo } from "@/types/types";
+import { NewTodo, Todo } from "@/types/types";
 import TodoReportButton from "@/Button";
 
 const TodosPage = () => {
@@ -34,6 +34,17 @@ const TodosPage = () => {
         },
         body: JSON.stringify(newTodo),
       });
+      const todo = await response.json();
+      return todo;
+    },
+  });
+
+  const deleteTodoMutation = useMutation({
+    mutationFn: async (id: string) => {
+      const response = await fetch(`http://localhost:4000/todos/${id}`, {
+        method: "DELETE",
+      });
+      console.log("response", response);
       const todo = await response.json();
       return todo;
     },
@@ -102,6 +113,17 @@ const TodosPage = () => {
             <h2>{todo.title}</h2>
             <p>{todo.contents}</p>
             {todo.isDone ? <p>Done</p> : <p>Not done</p>}
+            <button
+              onClick={() =>
+                deleteTodoMutation.mutate(todo.id, {
+                  onSuccess: () => {
+                    queryClient.invalidateQueries({ queryKey: ["todos"] });
+                  },
+                })
+              }
+            >
+              Delete
+            </button>
           </div>
         );
       })}
