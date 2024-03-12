@@ -20,7 +20,7 @@ export async function POST(request: Request) {
     body: JSON.stringify({ title, contents, isDone: false }),
   });
   const todo = await response.json();
-
+  console.log("todo", todo);
   return Response.json({ todo });
 }
 
@@ -37,3 +37,33 @@ export async function DELETE(request: Request) {
     return new Response("Todo not found", { status: 404 });
   }
 }
+
+export async function switchTodo(request: Request) {
+  try {
+    const { id, isDone } = await request.json();
+
+    const response = await fetch(`http://localhost:4000/todos/${id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ isDone: !isDone }), // 또는 원하는 값으로 변경
+    });
+
+    if (response.status === 200) {
+      const updatedTodo = await response.json();
+      return new Response(JSON.stringify(updatedTodo), { status: 200 });
+    } else {
+      return new Response("Todo not found", { status: 404 });
+    }
+  } catch (error) {
+    console.error("Error updating todo:", error);
+    return new Response("Internal Server Error", { status: 500 });
+  }
+}
+
+// export async function Patch(request:Request){
+//   const {isDone} = await request.json();
+
+//   const response = await fetch(`http://localhost`)
+// }

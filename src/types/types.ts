@@ -8,4 +8,5 @@ export type Todo = {
 export type NewTodo = {
   title: string;
   contents: string;
+  isDone: boolean;
 };
