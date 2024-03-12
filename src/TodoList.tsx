@@ -24,7 +24,6 @@ const TodoListPage = ({ isDone }: Pick<Todo, "isDone">) => {
       const response = await fetch(`http://localhost:4000/todos/${id}`, {
         method: "DELETE",
       });
-      console.log("response", response);
       const todo = await response.json();
       return todo;
     },

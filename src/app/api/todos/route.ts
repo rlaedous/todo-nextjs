@@ -1,7 +1,6 @@
-export async function GET(request: Request) {
+export async function GET() {
   const response = await fetch(`http://localhost:4000/todos`);
   const todos = await response.json();
-
   if (!todos) {
     return new Response("todos not found", { status: 404 });
   }
@@ -20,7 +19,6 @@ export async function POST(request: Request) {
     body: JSON.stringify({ title, contents, isDone: false }),
   });
   const todo = await response.json();
-  console.log("todo", todo);
   return Response.json({ todo });
 }
 
@@ -38,7 +36,7 @@ export async function DELETE(request: Request) {
   }
 }
 
-export async function switchTodo(request: Request) {
+export async function PATCH(request: Request) {
   try {
     const { id, isDone } = await request.json();
 
