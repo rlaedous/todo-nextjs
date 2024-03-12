@@ -3,7 +3,6 @@ import React from "react";
 const AboutPage = async () => {
   const response = await fetch(`http://localhost:4000/companyInfo`);
   const results = await response.json();
-  console.log("results", results);
 
   return (
     <>

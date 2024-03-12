@@ -4,3 +4,8 @@ export type Todo = {
   contents: string;
   isDone: boolean;
 };
+
+export type NewTodo = {
+  title: string;
+  contents: string;
+};

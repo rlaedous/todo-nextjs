@@ -26,8 +26,8 @@ export default function RootLayout({
             <Link href="/todos-csr">todos-csr</Link>
             <Link href="/todos-ssr">todos-ssr</Link>
           </nav>
+          {children}
         </QueryProvider>
-        {children}
       </body>
     </html>
   );
