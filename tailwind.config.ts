@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      // fontFamily: {
+      //   "madimi-one": ["Madimi One", "sans-serif"],
+      // },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":

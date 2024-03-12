@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* :root {
+:root {
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
@@ -26,8 +26,28 @@ body {
     rgb(var(--background-start-rgb));
 }
 
+/* font-family: "Madimi One", sans-serif; 로 설정하여 
+"Madimi One" 폰트 또는 sans-serif로 대체. */
+/* font-face에서 지정해준 weight가 덮어짐 */
+/* Tailwind CSS의 @layer 디렉티브는 유틸리티 클래스를 정의할 때 사용되며, 
+여기에는 font-family나 font-weight와 같은 CSS 속성만 포함되어야 합니다. 
+색상과 관련된 속성은 해당하지 않는다. */
 @layer utilities {
+  .font-madimi-one {
+    font-family: "Madimi One", sans-serif;
+
+    font-weight: 300;
+    font-style: normal;
+    /* font-color: "red"; */
+  }
+
   .text-balance {
     text-wrap: balance;
   }
-} */
+}
+
+@font-face {
+  font-family: "Madimi One";
+  font-weight: 400;
+  src: url("/fonts/MadimiOne-Regular.ttf") format("truetype");
+}
