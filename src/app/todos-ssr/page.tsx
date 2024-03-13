@@ -2,6 +2,7 @@ import TodoReportButton from "@/app/components/Button";
 import { Todo } from "@/types/types";
 import React from "react";
 
+// export const revalidate = 0;
 const TodosSsrPage = async () => {
   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/todos`, {
     cache: "no-cache",

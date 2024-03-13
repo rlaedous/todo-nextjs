@@ -23,7 +23,10 @@ export default function RootLayout({
           <Link href="/about">about</Link>
           <Link href="/report">report</Link>
           <Link href="/todos-csr">todos-csr</Link>
-          <Link href="/todos-ssr">todos-ssr</Link>
+          <a href="/todos-ssr">todos-ssr</a>
+          {/* <Link href="/todos-ssr">todos-ssr</Link> */}
+          {/* link 태그사용시 : csr page에서 새로고침  -> 글작성 -> ssr page(정상출력) ->csr page -> 글작성 -> ssr page (두번째 글작성 출력 x  과정 반복~~~) 나타남
+          link는 무조건 캐싱처리를 한다 ! */}
         </nav>
         <QueryProvider>{children}</QueryProvider>
       </body>
