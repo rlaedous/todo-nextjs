@@ -54,14 +54,21 @@ const TodoListPage = ({ isDone }: Pick<Todo, "isDone">) => {
   }
   return (
     <div>
-      <div className="p-4 bg-gray-200">{isDone ? "해야할일" : "끝낸일"}</div>
+      <div
+        // className="p-4 mb-4 border-2 border-blue bg-green-500"
+        className="p-4 mb-4 border-2 border-blue-500 bg-red-200 text-purple-600 font-bold"
+        // style={{ backgroundColor: "red" }}
+      >
+        {isDone ? "해야할일" : "끝낸일"}
+      </div>
       {todos
         ?.filter((item) => item.isDone === !isDone)
         ?.map((todo: Todo) => {
           return (
             <div
               key={todo.id}
-              className="bg-blue-900 p-4 mb-4 text-black rounded-md border-red-400"
+              className="bg-blue-900 p-4 mb-4 text-black border-2"
+              style={{ borderColor: "red" }}
             >
               <div className="text-xl font-semibold mb-2">{todo.title}</div>
               <div className="mb-4">{todo.contents}</div>

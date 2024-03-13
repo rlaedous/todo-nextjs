@@ -19,15 +19,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <QueryProvider>
-          <nav className="flex gap-4 p-4 bg-blue-500 text-white">
-            <Link href="/about">about</Link>
-            <Link href="/report">report</Link>
-            <Link href="/todos-csr">todos-csr</Link>
-            <Link href="/todos-ssr">todos-ssr</Link>
-          </nav>
-          {children}
-        </QueryProvider>
+        <nav className="flex gap-4 p-4 bg-blue-500 text-white">
+          <Link href="/about">about</Link>
+          <Link href="/report">report</Link>
+          <Link href="/todos-csr">todos-csr</Link>
+          <Link href="/todos-ssr">todos-ssr</Link>
+        </nav>
+        <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
   );

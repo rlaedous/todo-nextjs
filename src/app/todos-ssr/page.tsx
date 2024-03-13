@@ -1,4 +1,4 @@
-import TodoReportButton from "@/Button";
+import TodoReportButton from "@/app/components/Button";
 import { Todo } from "@/types/types";
 import React from "react";
 
@@ -10,9 +10,16 @@ const TodosSsrPage = async () => {
 
   return (
     <>
-      {results.map((result: Todo) => (
-        <div key={result.id}>
-          <TodoReportButton />
+      <div className="my-2 mx-2 border-2 border-black bg-green-400">
+        <TodoReportButton />
+      </div>
+      {results.map((result: Todo, idx: number) => (
+        <div
+          key={result.id}
+          className={`m-2 border-4 ${
+            idx % 2 === 0 ? "border-red-300" : "border-black"
+          }`}
+        >
           <div>id: {result.id}</div>
           <div>title: {result.title}</div>
           <div>contents: {result.contents}</div>

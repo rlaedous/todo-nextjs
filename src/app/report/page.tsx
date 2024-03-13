@@ -18,7 +18,7 @@ const ReportPage = async () => {
           {`현재까지 ${results.length}개의 todolist가 등록되었습니다.`}
         </div>
         <div className="font-medium text-2xl">
-          {`현재 까지 ${
+          {`현재까지 ${
             results.filter((result: Todo) => result.isDone === true).length
           }개의 완료 리스트, ${
             results.filter((result: Todo) => result.isDone === false).length
@@ -32,11 +32,11 @@ const ReportPage = async () => {
               <div className="font-serif text-2xl">id: {result.id}</div>
               <div className={Angkor_Font.className}>title: {result.title}</div>
               <div className={Noto_Sans_KR_Font.className}>
-                contents: {result.contents}body
+                contents: {result.contents}
               </div>
               <div className="font-madimi-one">
-                Whereas recognition of the inherent dignity 1234444444 isDone:{" "}
-                {result.isDone.toString()}
+                {" "}
+                isDone : {result.isDone.toString()}
               </div>
             </div>
           </div>
