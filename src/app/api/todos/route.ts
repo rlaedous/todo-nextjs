@@ -1,5 +1,5 @@
 export async function GET() {
-  const response = await fetch(`http://localhost:4000/todos`);
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/todos`);
   const todos = await response.json();
   if (!todos) {
     return new Response("todos not found", { status: 404 });
@@ -11,7 +11,7 @@ export async function GET() {
 export async function POST(request: Request) {
   const { title, contents } = await request.json();
 
-  const response = await fetch(`http://localhost:4000/todos`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/todos`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -25,9 +25,12 @@ export async function POST(request: Request) {
 export async function DELETE(request: Request) {
   const { id } = await request.json();
 
-  const response = await fetch(`http://localhost:4000/todos/${id}`, {
-    method: "DELETE",
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/todos/${id}`,
+    {
+      method: "DELETE",
+    }
+  );
 
   if (response.status === 204) {
     return new Response(null, { status: 204 });
@@ -40,13 +43,16 @@ export async function PATCH(request: Request) {
   try {
     const { id, isDone } = await request.json();
 
-    const response = await fetch(`http://localhost:4000/todos/${id}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ isDone: !isDone }), // 또는 원하는 값으로 변경
-    });
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/todos/${id}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ isDone: !isDone }),
+      }
+    );
 
     if (response.status === 200) {
       const updatedTodo = await response.json();
@@ -59,9 +65,3 @@ export async function PATCH(request: Request) {
     return new Response("Internal Server Error", { status: 500 });
   }
 }
-
-// export async function Patch(request:Request){
-//   const {isDone} = await request.json();
-
-//   const response = await fetch(`http://localhost`)
-// }

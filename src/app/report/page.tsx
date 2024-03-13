@@ -4,7 +4,7 @@ import React from "react";
 const Noto_Sans_KR_Font = Noto_Sans_KR({ subsets: ["latin"] });
 const Angkor_Font = Angkor({ subsets: ["latin"], weight: "400" });
 const ReportPage = async () => {
-  const response = await fetch(`http://localhost:4000/todos`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/todos`, {
     next: {
       revalidate: 10,
     },

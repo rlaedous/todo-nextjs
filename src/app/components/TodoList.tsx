@@ -1,29 +1,24 @@
 "use client";
-
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import React from "react";
 import { Todo } from "@/types/types";
 
-const TodoListPage = ({ isDone }: Pick<Todo, "isDone">) => {
+const TodoListPage = ({
+  isDone,
+  todos,
+}: {
+  isDone: boolean;
+  todos: Todo[];
+}) => {
   const queryClient = useQueryClient();
-  const {
-    data: todos,
-    isLoading,
-    isError,
-  } = useQuery<Todo[]>({
-    queryKey: ["todos"],
-    queryFn: async () => {
-      const response = await fetch(`http://localhost:4000/todos`);
-      const todos = await response.json();
-      return todos;
-    },
-  });
-
   const deleteTodoMutation = useMutation({
     mutationFn: async (id: string) => {
-      const response = await fetch(`http://localhost:4000/todos/${id}`, {
-        method: "DELETE",
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/todos/${id}`,
+        {
+          method: "DELETE",
+        }
+      );
       const todo = await response.json();
       return todo;
     },
@@ -32,7 +27,7 @@ const TodoListPage = ({ isDone }: Pick<Todo, "isDone">) => {
   const switchTodoMutation = useMutation({
     mutationFn: async (payload: { id: string; isDone: boolean }) => {
       const response = await fetch(
-        `http://localhost:4000/todos/${payload.id}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/todos/${payload.id}`,
         {
           method: "PATCH",
           headers: {
@@ -45,36 +40,25 @@ const TodoListPage = ({ isDone }: Pick<Todo, "isDone">) => {
       return switchedTodo;
     },
   });
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
-  if (isError) {
-    return <div>Error</div>;
-  }
   return (
     <div>
-      <div
-        // className="p-4 mb-4 border-2 border-blue bg-green-500"
-        className="p-4 mb-4 border-2 border-blue-500 bg-red-200 text-purple-600 font-bold"
-        // style={{ backgroundColor: "red" }}
-      >
+      <div className="p-4 mb-4 border-2 border-blue-500 bg-red-200 text-purple-600 font-bold">
         {isDone ? "해야할일" : "끝낸일"}
       </div>
       {todos
         ?.filter((item) => item.isDone === !isDone)
-        ?.map((todo: Todo) => {
+        .map((todo: Todo) => {
           return (
             <div
               key={todo.id}
-              className="bg-blue-900 p-4 mb-4 text-black border-2"
-              style={{ borderColor: "red" }}
+              className="bg-blue-400 p-4 mb-4 text-black border-4 border-red-400"
             >
               <div className="text-xl font-semibold mb-2">{todo.title}</div>
               <div className="mb-4">{todo.contents}</div>
               {todo.isDone ? <p>Done</p> : <p>Not done</p>}
               <button
-                className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:outline-none focus:ring focus:border-blue-300"
+                className="mr-2 bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600 focus:ring focus:border-blue-300"
                 onClick={() =>
                   deleteTodoMutation.mutate(todo.id, {
                     onSuccess: () => {
@@ -86,6 +70,7 @@ const TodoListPage = ({ isDone }: Pick<Todo, "isDone">) => {
                 Delete
               </button>
               <button
+                className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-300  focus:ring focus:border-blue-600"
                 onClick={() => {
                   switchTodoMutation.mutate(todo, {
                     onSuccess: () => {
@@ -94,7 +79,7 @@ const TodoListPage = ({ isDone }: Pick<Todo, "isDone">) => {
                   });
                 }}
               >
-                수정하기
+                {isDone ? "완료" : "취소"}
               </button>
             </div>
           );

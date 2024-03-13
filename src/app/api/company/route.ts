@@ -1,5 +1,7 @@
 export async function GET(request: Request) {
-  const response = await fetch(`http://localhost:4000/companyInfo`);
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/companyInfo`
+  );
   const companyInfo = await response.json();
 
   if (!companyInfo) {
@@ -12,13 +14,16 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
   const { title, contents } = await request.json();
 
-  const response = await fetch(`http://localhost:4000/companyInfo`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ title, contents, isDone: false }),
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/companyInfo`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ title, contents, isDone: false }),
+    }
+  );
   const todo = await response.json();
 
   return Response.json({ todo });

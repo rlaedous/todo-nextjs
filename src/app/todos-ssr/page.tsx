@@ -3,14 +3,14 @@ import { Todo } from "@/types/types";
 import React from "react";
 
 const TodosSsrPage = async () => {
-  const response = await fetch(`http://localhost:4000/todos`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/todos`, {
     cache: "no-cache",
   });
   const results = await response.json();
 
   return (
     <>
-      <div className="my-2 mx-2 border-2 border-black bg-green-400">
+      <div className="flex my-2 mx-2 border-2 border-black bg-green-400">
         <TodoReportButton />
       </div>
       {results.map((result: Todo, idx: number) => (
