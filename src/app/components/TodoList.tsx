@@ -45,7 +45,7 @@ const TodoListPage = ({
   return (
     <div>
       <div className="p-4 mb-4 border-2 border-blue-500 bg-red-200 text-purple-600 font-bold">
-        해야할일
+        {isDone ? "해야할일" : "끝낸일"}
       </div>
       {todos
         .filter((item: Todo) => item.isDone === !isDone)
