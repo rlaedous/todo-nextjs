@@ -26,22 +26,33 @@ const ReportPage = async () => {
           }개의 할일 리스트가 존재합니다.`}
         </div>
       </div>
-      <div className="p-10 m-10  bg-yellow-200  border-2 border-black ">
-        {results.map((result: Todo) => (
-          <div key={result.id}>
-            <div className="bg-green-500 p-5 m-10 border-2 border-gray-500 text-4xl">
-              <div className="font-serif text-2xl">id: {result.id}</div>
-              <div className={Angkor_Font.className}>title: {result.title}</div>
-              <div className={Noto_Sans_KR_Font.className}>
-                contents: {result.contents}
-              </div>
-              <div className="font-madimi-one">
-                {" "}
-                isDone : {result.isDone.toString()}
+      <div className="p-10 m-10  bg-yellow-500  border-2 border-black ">
+        {results
+          .sort(
+            (a: { id: string }, b: { id: string }) =>
+              parseInt(b.id) - parseInt(a.id)
+          )
+          .map((result: Todo) => (
+            <div key={result.id}>
+              <div
+                className={`p-5 m-10 border-2 border-gray-500 text-4xl
+                  ${result.isDone ? "bg-blue-500" : "bg-red-500"}
+            `}
+              >
+                <div className="font-serif text-2xl">id: {result.id}</div>
+                <div className={Angkor_Font.className}>
+                  title: {result.title}
+                </div>
+                <div className={Noto_Sans_KR_Font.className}>
+                  contents: {result.contents}
+                </div>
+                <div className="font-madimi-one">
+                  {" "}
+                  isDone : {result.isDone.toString()}
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
       </div>
     </>
   );

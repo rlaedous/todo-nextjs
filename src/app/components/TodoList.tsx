@@ -81,7 +81,7 @@ const TodoListPage = ({
                   switchTodoMutation.mutate(todo);
                 }}
               >
-                {todo.isDone ? "완료" : "취소"}
+                {todo.isDone ? "취소" : "완료"}
               </button>
             </div>
           );
