@@ -10,14 +10,18 @@ const Input = () => {
 
   const newTodoMutation = useMutation({
     mutationFn: async (newTodo: NewTodo) => {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/todos`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(newTodo),
-      });
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/todos`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newTodo),
+        }
+      );
       const todo = await response.json();
+
       return todo;
     },
   });

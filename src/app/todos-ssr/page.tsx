@@ -1,10 +1,10 @@
-import TodoReportButton from "@/app/components/Button";
+import LinkButton from "@/app/components/LinkButton";
 import { Todo } from "@/types/types";
 import React from "react";
 
 // export const revalidate = 0;
 const TodosSsrPage = async () => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/todos`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/todos`, {
     cache: "no-cache",
   });
   const results = await response.json();
@@ -12,7 +12,7 @@ const TodosSsrPage = async () => {
   return (
     <>
       <div className="flex my-2 mx-2 border-2 border-black bg-green-400">
-        <TodoReportButton />
+        <LinkButton />
       </div>
       {results.map((result: Todo, idx: number) => (
         <div

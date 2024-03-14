@@ -3,8 +3,9 @@ import { Noto_Sans_KR, Angkor } from "next/font/google";
 import React from "react";
 const Noto_Sans_KR_Font = Noto_Sans_KR({ subsets: ["latin"] });
 const Angkor_Font = Angkor({ subsets: ["latin"], weight: "400" });
+
 const ReportPage = async () => {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/todos`, {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/todos`, {
     next: {
       revalidate: 10,
     },

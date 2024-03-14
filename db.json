@@ -1,0 +1,21 @@
+{
+  "companyInfo": {
+    "name": "주식회사 팀스파르타",
+    "description": "우리회사에 대한 설명입니다. blablabla~~~~~~",
+    "image": "https://www.fitpetmall.com/wp-content/uploads/2023/10/b37132cb-8757-4678-b8f6-9f9e25cb04ca-1.png"
+  },
+  "todos": [
+    {
+      "id": "5501",
+      "title": "ㅎㅇㅎㅇ",
+      "contents": "ㅎㅇㅎㅎㅇ",
+      "isDone": true
+    },
+    {
+      "id": "cf73",
+      "title": "ㅇㅇㅇ",
+      "contents": "ㅇㅇㅇ",
+      "isDone": false
+    }
+  ]
+}

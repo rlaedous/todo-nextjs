@@ -2,8 +2,9 @@ import React from "react";
 
 const AboutPage = async () => {
   const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/companyInfo`
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/companyInfo`
   );
+
   const results = await response.json();
 
   return (

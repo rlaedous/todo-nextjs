@@ -2,7 +2,7 @@
 import Link from "next/link";
 import React from "react";
 
-const TodoReportButton = () => {
+const LinkButton = () => {
   return (
     <Link href="/report" className="bg-red-500 hover:bg-red-200">
       <div> 할일정보통계보러가기</div>
@@ -10,4 +10,4 @@ const TodoReportButton = () => {
   );
 };
 
-export default TodoReportButton;
+export default LinkButton;
