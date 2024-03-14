@@ -11,7 +11,8 @@ const Input = () => {
   const newTodoMutation = useMutation({
     mutationFn: async (newTodo: NewTodo) => {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/todos`,
+        // `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/todos`,
+        `/api/todos`,
         {
           method: "POST",
           headers: {

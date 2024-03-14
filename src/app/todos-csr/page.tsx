@@ -15,7 +15,9 @@ const TodosCsrPage = () => {
     queryKey: ["todos"],
     queryFn: async (): Promise<Todo[]> => {
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/todos`
+        // `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/todos`
+        `/api/todos`
+        //위에상대경로
       );
       const { todos } = await response.json();
       return todos;

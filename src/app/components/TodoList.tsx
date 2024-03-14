@@ -14,9 +14,14 @@ const TodoListPage = ({
 
   const deleteTodoMutation = useMutation({
     mutationFn: async ({ id }: { id: string }) => {
-      await fetch(`${process.env.NEXT_PUBLIC_CLIENT_URL}/api/todos/${id}`, {
-        method: "DELETE",
-      });
+      await fetch(
+        // `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/todos/${id}`
+        `/api/todos/${id}`,
+
+        {
+          method: "DELETE",
+        }
+      );
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["todos"] });
@@ -25,13 +30,17 @@ const TodoListPage = ({
 
   const switchTodoMutation = useMutation({
     mutationFn: async ({ id, isDone }: { id: string; isDone: boolean }) => {
-      await fetch(`${process.env.NEXT_PUBLIC_CLIENT_URL}/api/todos/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ isDone: !isDone }),
-      });
+      await fetch(
+        // `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/todos/${id}`
+        `/api/todos/${id}`,
+        {
+          method: "PATCH",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ isDone: !isDone }),
+        }
+      );
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["todos"] });
