@@ -1,4 +1,4 @@
-import LinkButton from "@/app/components/LinkButton";
+import LinkButton from "@/components/LinkButton";
 import { Todo } from "@/types/types";
 import React from "react";
 

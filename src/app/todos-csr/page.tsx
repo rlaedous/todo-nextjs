@@ -1,19 +1,18 @@
 "use client";
-import Input from "@/app/components/Input";
-import TodoListPage from "@/app/components/TodoList";
+import Input from "@/components/Input";
+import TodoListPage from "@/components/TodoList";
 import { useQuery } from "@tanstack/react-query";
-import RouterButton from "../components/RouterButton";
-import { Todo } from "@/types/types";
+import RouterButton from "@/components/RouterButton";
 
 const TodosCsrPage = () => {
   const {
     data: todos,
-    isPending,
-    // isLoading,
+
+    isLoading,
     isError,
   } = useQuery({
     queryKey: ["todos"],
-    queryFn: async (): Promise<Todo[]> => {
+    queryFn: async () => {
       const response = await fetch(
         // `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/todos`
         `/api/todos`
@@ -24,19 +23,9 @@ const TodosCsrPage = () => {
     },
   });
 
-  // if(todos){
-  //   return
-  // }
-  // if (is) {
-  //   return <div>is펜딩...</div>;
-  // }
-
-  if (isPending) {
-    return <div>is로딩...</div>;
+  if (isLoading) {
+    return <div>로딩중입니다..!.!.!.!.!.!.!.!</div>;
   }
-
-  // const isLoading = status === 'fetching';
-  // const isPending = status === 'pending'; 처음불러올때 언디파인드
 
   if (isError) {
     return <div>Error</div>;

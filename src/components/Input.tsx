@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { NewTodo } from "@/types/types";
+import { Todo } from "@/types/types";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const Input = () => {
@@ -8,8 +8,8 @@ const Input = () => {
   const [contents, setContents] = useState("");
   const queryClient = useQueryClient();
 
-  const newTodoMutation = useMutation({
-    mutationFn: async (newTodo: NewTodo) => {
+  const { mutate: newTodoMutation, isPending } = useMutation({
+    mutationFn: async (newTodo: Omit<Todo, "id">) => {
       const response = await fetch(
         // `${process.env.NEXT_PUBLIC_CLIENT_URL}/api/todos`,
         `/api/todos`,
@@ -37,19 +37,20 @@ const Input = () => {
           if (!title.trim() || !contents.trim()) {
             return alert("글을입력하세요!");
           }
-          newTodoMutation.mutate(
-            { title, contents, isDone: false },
-            {
-              onSuccess: () => {
-                setTitle("");
-                setContents("");
+          if (!isPending)
+            newTodoMutation(
+              { title, contents, isDone: false },
+              {
+                onSuccess: () => {
+                  setTitle("");
+                  setContents("");
 
-                queryClient.invalidateQueries({
-                  queryKey: ["todos"],
-                });
-              },
-            }
-          );
+                  queryClient.invalidateQueries({
+                    queryKey: ["todos"],
+                  });
+                },
+              }
+            );
         }}
         className="flex"
       >
@@ -94,7 +95,7 @@ const Input = () => {
           type="submit"
           className="bg-blue-500 text-white px-2 hover:bg-blue-300 rounded-md focus:ring-8 focus:bg-red-300"
         >
-          Add Todo
+          {isPending ? "Adding Todo..." : "Add Todo"}
         </button>
       </form>
     </section>

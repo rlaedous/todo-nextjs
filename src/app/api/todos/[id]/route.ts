@@ -1,5 +1,5 @@
 export async function DELETE(
-  request: Request,
+  _: Request,
   { params }: { params: { id: string } }
 ) {
   const id = params.id;
